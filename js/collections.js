@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 1. Fetch Products from API
   try {
-    const res = await fetch('/api/products');
+    const res = await fetch('/data/products.json');
     const products = await res.json();
     
     // 2. Render Products
