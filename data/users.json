@@ -1,0 +1,16 @@
+[
+  {
+    "id": "admin1",
+    "name": "Yönetici",
+    "email": "admin@lunary.com",
+    "password": "$2b$10$SBy6eWyG/C6POonog3jrx.TSlgT2oSL.2mdd1VqWfpluardbFl7uK",
+    "role": "admin"
+  },
+  {
+    "id": "admin1",
+    "name": "Yönetici",
+    "email": "admin1234",
+    "password": "$2b$10$OoYRqKu1gJzXOqN7jcjMterbtOST/2kCTiUOP2A.9uSMi6N8UPoPa",
+    "role": "admin"
+  }
+]

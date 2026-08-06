@@ -1,0 +1,38 @@
+[
+  {
+    "id": "b1",
+    "tag": "Bakım",
+    "date": "15 Temmuz 2026",
+    "title": "Mücevher Bakımı Rehberi: Parlaklığı Koruma Sanatı",
+    "excerpt": "Altın ve gümüş mücevherlerinizin ilk günkü parlaklığını korumanız için uzman önerileri ve pratik bakım ipuçları.",
+    "image": "/assets/images/product_ring_1.jpg",
+    "content": "Tam içerik buraya gelecek..."
+  },
+  {
+    "id": "b2",
+    "tag": "Trendler",
+    "date": "8 Temmuz 2026",
+    "title": "2026 Trend Takılar: Minimalizm ve Cesur Detaylar",
+    "excerpt": "Bu yılın en çarpıcı mücevher trendlerini keşfedin. Minimal çizgilerden cesur taş kombinasyonlarına kadar.",
+    "image": "/assets/images/product_necklace_1.jpg",
+    "content": "Tam içerik buraya gelecek..."
+  },
+  {
+    "id": "b3",
+    "tag": "Taşlar",
+    "date": "1 Temmuz 2026",
+    "title": "Değerli Taşların Gizli Anlamları ve Enerjileri",
+    "excerpt": "Yakut'un tutkusu, safirin huzuru, zümrütün yenilenmesi… Her taşın ardındaki anlam ve tarih.",
+    "image": "/assets/images/collection_rings.jpg",
+    "content": "Tam içerik buraya gelecek..."
+  },
+  {
+    "id": "b4",
+    "tag": "Tasarım",
+    "date": "20 Haziran 2026",
+    "title": "Kişiye Özel Mücevher Tasarım Süreci Nasıl İşler?",
+    "excerpt": "Hayalinizdeki mücevherin gerçeğe dönüşme hikayesi. Eskizden üretime atölyemizin perde arkası.",
+    "image": "/assets/images/product_bracelet_1.jpg",
+    "content": "Tam içerik buraya gelecek..."
+  }
+]

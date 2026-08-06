@@ -1,0 +1,45 @@
+/* ========================================================
+   LUNARY — Blog Page Styles
+   ======================================================== */
+
+.blog-hero {
+  padding: calc(var(--nav-height) + var(--space-4xl)) 0 var(--space-3xl);
+  background: var(--color-bg-alt);
+  text-align: center;
+}
+
+.blog-hero__title {
+  margin-bottom: var(--space-md);
+}
+
+.blog-hero__desc {
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: var(--text-md);
+}
+
+.blog-page {
+  padding: var(--space-3xl) 0 var(--space-section);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
+}
+
+.blog-card--hidden {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+}

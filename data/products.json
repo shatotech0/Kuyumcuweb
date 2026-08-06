@@ -1,0 +1,98 @@
+[
+  {
+    "id": "p1",
+    "category": "yuzuk",
+    "title": "Ay Işığı Yüzük",
+    "desc": "Ay'ın zarif hilalinden ilham alan minimal tasarım",
+    "material": "925 Ayar Gümüş",
+    "image": "/assets/images/product_ring_1.jpg"
+  },
+  {
+    "id": "p2",
+    "category": "yuzuk",
+    "title": "Sonsuzluk Bandı",
+    "desc": "Geometrik çizgilerin buluştuğu modern bir klasik",
+    "material": "14K Altın",
+    "image": "/assets/images/product_ring_2.jpg"
+  },
+  {
+    "id": "p3",
+    "category": "yuzuk",
+    "title": "Gül Yaprağı",
+    "desc": "Doğanın zarafetini parmağınıza taşıyan ince işçilik",
+    "material": "925 Ayar Gümüş, Altın Kaplama",
+    "image": "/assets/images/collection_rings.jpg"
+  },
+  {
+    "id": "p4",
+    "category": "kolye",
+    "title": "Hilal Kolye",
+    "desc": "Ay'ın büyülü hilalini boynunuzda taşıyın",
+    "material": "14K Altın, Pırlanta",
+    "image": "/assets/images/product_necklace_1.jpg"
+  },
+  {
+    "id": "p5",
+    "category": "kolye",
+    "title": "Zincir Koleksiyon",
+    "desc": "Cesur zincir tasarımı, günlük zarafet",
+    "material": "14K Altın",
+    "image": "/assets/images/product_necklace_2.jpg"
+  },
+  {
+    "id": "p6",
+    "category": "kolye",
+    "title": "Yıldız Sarkıt",
+    "desc": "Gökyüzünün parıltısını yansıtan ince kolye",
+    "material": "925 Ayar Gümüş",
+    "image": "/assets/images/collection_necklaces.jpg"
+  },
+  {
+    "id": "p7",
+    "category": "bileklik",
+    "title": "Botanik Kelepçe",
+    "desc": "El kazıma botanik motifleriyle süslenmiş kelepçe",
+    "material": "14K Altın",
+    "image": "/assets/images/product_bracelet_1.jpg"
+  },
+  {
+    "id": "p8",
+    "category": "bileklik",
+    "title": "Charm Bileklik",
+    "desc": "Küçük charm pendantlarla kişiselleştirilmiş tasarım",
+    "material": "925 Ayar Gümüş",
+    "image": "/assets/images/product_bracelet_2.jpg"
+  },
+  {
+    "id": "p9",
+    "category": "bileklik",
+    "title": "Örgü Bileklik",
+    "desc": "İnce örgü zincirin zarif dansı",
+    "material": "14K Altın Kaplama",
+    "image": "/assets/images/collection_bracelets.jpg"
+  },
+  {
+    "id": "p10",
+    "category": "kupe",
+    "title": "Halka Küpe",
+    "desc": "Dövme dokusuyla benzersiz halka tasarımı",
+    "material": "14K Altın",
+    "image": "/assets/images/product_ring_1.jpg"
+  },
+  {
+    "id": "p11",
+    "category": "kupe",
+    "title": "Yıldız Küpe",
+    "desc": "Yıldız desenli minimal tırnak küpe",
+    "material": "925 Ayar Gümüş, Pırlanta",
+    "image": "/assets/images/product_necklace_1.jpg"
+  },
+  {
+    "id": "p12",
+    "category": "kupe",
+    "title": "Damla Küpe",
+    "desc": "İnci detaylı zarif damla küpeler",
+    "material": "14K Altın, İnci",
+    "image": "/assets/images/collection_earrings.jpg"
+  }
+]

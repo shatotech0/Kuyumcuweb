@@ -1,0 +1,67 @@
+/* ========================================================
+   LUNARY — Collections Page Styles
+   ======================================================== */
+
+.collections-hero {
+  padding: calc(var(--nav-height) + var(--space-4xl)) 0 var(--space-3xl);
+  background: var(--color-bg-alt);
+  text-align: center;
+}
+
+.collections-hero__title {
+  margin-bottom: var(--space-md);
+}
+
+.collections-hero__desc {
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: var(--text-md);
+}
+
+.collections-page {
+  padding: var(--space-3xl) 0 var(--space-section);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+.product-card--hidden {
+  display: none;
+}
+
+.product-card--visible {
+  animation: card-in 0.5s ease-out forwards;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.products-count {
+  text-align: center;
+  margin-top: var(--space-2xl);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}

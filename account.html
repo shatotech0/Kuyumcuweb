@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hesabım - Lunary</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    .account-layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 2rem;
+      padding: calc(var(--nav-height) + 2rem) 5% 5rem;
+    }
+    .account-sidebar {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--color-border);
+      padding: 1.5rem;
+      border-radius: 4px;
+      height: fit-content;
+    }
+    .account-sidebar h3 {
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      font-family: var(--font-brand);
+    }
+    .account-menu button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.8rem;
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: all 0.3s;
+    }
+    .account-menu button.active, .account-menu button:hover {
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+      background: rgba(212, 175, 55, 0.05);
+    }
+    .account-content {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--color-border);
+      padding: 2rem;
+      border-radius: 4px;
+    }
+    
+    .order-card {
+      border: 1px solid var(--color-border);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--color-bg);
+    }
+    .order-info h4 { margin-bottom: 0.5rem; color: var(--color-accent); }
+    .order-info p { margin: 0; color: var(--color-text-muted); font-size: 0.9rem; }
+    
+    .status-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--color-accent);
+    }
+
+    /* Chat UI */
+    .chat-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .chat-modal.active { display: flex; }
+    .chat-box {
+      background: var(--color-bg);
+      border: 1px solid var(--color-accent);
+      width: 100%;
+      max-width: 600px;
+      height: 70vh;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--color-accent);
+    }
+    .chat-body {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .chat-message {
+      max-width: 80%;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+    }
+    .msg-mine {
+      align-self: flex-end;
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+    .msg-theirs {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--color-border);
+    }
+    .msg-meta { font-size: 0.7rem; opacity: 0.7; margin-bottom: 0.2rem; }
+    
+    .chat-input {
+      padding: 1rem;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar placeholders handled by JS -->
+  <nav class="navbar navbar--solid" id="navbar">
+    <div class="navbar__inner">
+      <a href="/" class="navbar__logo"><span class="navbar__logo-text">Lunary</span></a>
+      <div class="navbar__links" id="navLinks">
+        <a href="/" class="navbar__link">Ana Sayfa</a>
+        <a href="/collections.html" class="navbar__link">Koleksiyonlar</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="account-layout">
+    <aside class="account-sidebar">
+      <h3 id="userNameDisplay">Hesabım</h3>
+      <div class="account-menu">
+        <button class="active">Siparişlerim & Mesajlar</button>
+        <button onclick="Auth.logout()">Çıkış Yap</button>
+      </div>
+    </aside>
+    
+    <section class="account-content">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
+        <h2 style="color:var(--color-accent); margin:0;">Sipariş Taleplerim</h2>
+        <button class="btn btn--solid" onclick="startGeneralSupport()">Genel Destek / Soru Sor</button>
+      </div>
+      <div id="ordersList">
+        Yükleniyor...
+      </div>
+    </section>
+  </main>
+
+  <!-- Chat Modal -->
+  <div class="chat-modal" id="chatModal">
+    <div class="chat-box">
+      <div class="chat-header">
+        <h3 id="chatTitle">Sipariş Detayı</h3>
+        <button class="btn btn--outline" onclick="closeChat()" style="padding: 0.2rem 0.5rem;">Kapat</button>
+      </div>
+      <div class="chat-body" id="chatBody"></div>
+      <form class="chat-input" id="chatForm">
+        <input type="text" id="chatInput" class="form-input" placeholder="Mesajınızı yazın..." required style="flex:1;">
+        <button type="submit" class="btn btn--solid">Gönder</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script>
+    if (!Auth.isLoggedIn()) {
+      window.location.href='/login.html';
+    }
+
+    const user = Auth.getUser();
+    document.getElementById('userNameDisplay').innerText = `Hoş Geldiniz, ${user.name}`;
+
+    let currentOrderId = null;
+
+    async function loadOrders() {
+      const res = await fetch('/api/orders', { headers: Auth.getAuthHeaders() });
+      if (res.ok) {
+        const orders = await res.json();
+        const container = document.getElementById('ordersList');
+        if (orders.length === 0) {
+          container.innerHTML = '<p>Henüz bir sipariş talebiniz bulunmuyor.</p>';
+          return;
+        }
+        
+        container.innerHTML = orders.map(o => `
+          <div class="order-card">
+            <div class="order-info">
+              <h4>${o.productTitle}</h4>
+              <p>Tarih: ${new Date(o.createdAt).toLocaleDateString('tr-TR')}</p>
+              <p>Varyasyonlar: ${Object.values(o.variations).join(', ')}</p>
+            </div>
+            <div style="text-align:right;">
+              <div class="status-badge" style="margin-bottom:0.5rem; display:inline-block;">${o.status}</div><br>
+              <button class="btn btn--outline" onclick="openChat('${o.id}', '${o.productTitle}')">Mesajlar / Detay</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    async function openChat(orderId, title) {
+      currentOrderId = orderId;
+      document.getElementById('chatTitle').innerText = title + ' - İletişim';
+      document.getElementById('chatModal').classList.add('active');
+      loadMessages();
+    }
+
+    function closeChat() {
+      document.getElementById('chatModal').classList.remove('active');
+      currentOrderId = null;
+    }
+
+    async function startGeneralSupport() {
+      // Create a dummy 'order' acting as a support thread
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: Auth.getAuthHeaders(),
+        body: JSON.stringify({
+          productId: 'support',
+          productTitle: 'Genel Destek / Soru',
+          variations: { Not: 'Genel Müşteri Desteği' }
+        })
+      });
+      if(res.ok) {
+        const order = await res.json();
+        loadOrders();
+        openChat(order.id, order.productTitle);
+      }
+    }
+
+    async function loadMessages() {
+      if (!currentOrderId) return;
+      const res = await fetch(`/api/messages/${currentOrderId}`, { headers: Auth.getAuthHeaders() });
+      if (res.ok) {
+        const messages = await res.json();
+        const body = document.getElementById('chatBody');
+        body.innerHTML = messages.map(m => {
+          const isMine = m.senderId === user.id;
+          return `
+            <div class="chat-message ${isMine ? 'msg-mine' : 'msg-theirs'}">
+              <div class="msg-meta">${m.senderName} (${m.senderRole})</div>
+              <div>${m.text}</div>
+            </div>
+          `;
+        }).join('');
+        body.scrollTop = body.scrollHeight;
+      }
+    }
+
+    document.getElementById('chatForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const text = input.value;
+      if(!text || !currentOrderId) return;
+
+      const res = await fetch('/api/messages', {
+        method: 'POST',
+        headers: Auth.getAuthHeaders(),
+        body: JSON.stringify({ orderId: currentOrderId, text })
+      });
+      if(res.ok) {
+        input.value = '';
+        loadMessages();
+      }
+    });
+
+    loadOrders().then(() => {
+      // Auto open support if requested from dropdown
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('support') === '1') {
+        startGeneralSupport();
+        // Clean URL to prevent re-opening on refresh
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    });
+    
+    setInterval(() => { if(currentOrderId) loadMessages(); }, 3000); // Poll messages
+  </script>
+</body>
+</html>

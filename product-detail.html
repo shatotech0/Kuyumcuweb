@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ay Işığı Yüzük — Lunary</title>
+  <meta name="description" content="Ay'ın zarif hilalinden ilham alan 925 Ayar Gümüş yüzük. El işçiliğiyle üretilmiş, zamansız bir tasarım.">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/pages/product-detail.css">
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar--solid" id="navbar">
+      <div class="navbar__inner">
+        <a href="/" class="navbar__logo">
+          <span class="navbar__logo-text">Lunary</span>
+        </a>
+        <div class="navbar__links" id="navLinks">
+          <a href="/" class="navbar__link">Ana Sayfa</a>
+          <a href="/collections.html" class="navbar__link active">Koleksiyonlar</a>
+          <a href="/blog.html" class="navbar__link">Blog</a>
+          <a href="/about.html" class="navbar__link">Hakkımızda</a>
+          <a href="/contact.html" class="navbar__link">İletişim</a>
+        </div>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Menüyü aç">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/" class="navbar__link">Ana Sayfa</a>
+      <a href="/collections.html" class="navbar__link active">Koleksiyonlar</a>
+      <a href="/blog.html" class="navbar__link">Blog</a>
+      <a href="/about.html" class="navbar__link">Hakkımızda</a>
+      <a href="/contact.html" class="navbar__link">İletişim</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <section class="product-detail">
+        <div class="container">
+          <nav class="breadcrumb">
+            <a href="/">Ana Sayfa</a>
+            <span class="breadcrumb-sep">›</span>
+            <a href="/collections.html">Koleksiyonlar</a>
+            <span class="breadcrumb-sep">›</span>
+            <a href="/collections.html#yuzukler" id="bCatLink">Yüzükler</a>
+            <span class="breadcrumb-sep">›</span>
+            <span class="breadcrumb-current" id="bTitle">Yükleniyor...</span>
+          </nav>
+
+          <div class="product-detail__layout">
+            <!-- Gallery -->
+            <div class="product-gallery reveal-left">
+              <div class="product-gallery__main" id="mainImage">
+                <img loading="lazy" decoding="async"  src="/assets/images/product_ring_1.jpg" alt="Ay Işığı Yüzük - Ana Görsel" id="mainImg">
+              </div>
+              <div class="product-gallery__thumbs">
+                <button class="product-gallery__thumb active" data-img="/assets/images/product_ring_1.jpg">
+                  <img loading="lazy" decoding="async"  src="/assets/images/product_ring_1.jpg" alt="Ay Işığı Yüzük - Görsel 1">
+                </button>
+                <button class="product-gallery__thumb" data-img="/assets/images/product_ring_2.jpg">
+                  <img loading="lazy" decoding="async"  src="/assets/images/product_ring_2.jpg" alt="Ay Işığı Yüzük - Görsel 2">
+                </button>
+                <button class="product-gallery__thumb" data-img="/assets/images/collection_rings.jpg">
+                  <img loading="lazy" decoding="async"  src="/assets/images/collection_rings.jpg" alt="Ay Işığı Yüzük - Görsel 3">
+                </button>
+              </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info reveal-right">
+              <span class="product-info__category" id="pCat">Yükleniyor...</span>
+              <h1 class="product-info__name" id="pTitle">Yükleniyor...</h1>
+              <div class="gold-divider gold-divider--left"></div>
+              <p class="product-info__desc" id="pDesc">
+                Ürün detayları yükleniyor...
+              </p>
+
+              <!-- Details Table -->
+              <div class="product-details-table">
+                <div class="product-details-table__row">
+                  <span class="product-details-table__label">Materyal</span>
+                  <span class="product-details-table__value" id="pMat">Yükleniyor...</span>
+                </div>
+                <div class="product-details-table__row">
+                  <span class="product-details-table__label">Taş</span>
+                  <span class="product-details-table__value">Doğal Yakut (0.15 ct)</span>
+                </div>
+                <div class="product-details-table__row">
+                  <span class="product-details-table__label">Kaplama</span>
+                  <span class="product-details-table__value">18K Altın Kaplama</span>
+                </div>
+                <div class="product-details-table__row">
+                  <span class="product-details-table__label">Ağırlık</span>
+                  <span class="product-details-table__value">3.2 gram</span>
+                </div>
+                <div class="product-details-table__row">
+                  <span class="product-details-table__label">Beden</span>
+                  <span class="product-details-table__value">12 - 20 (Ayarlanabilir)</span>
+                </div>
+                <div class="product-details-table__row">
+                  <span class="product-details-table__label">Üretim</span>
+                  <span class="product-details-table__value">El İşçiliği</span>
+                </div>
+                <div class="product-details-table__row">
+                  <span class="product-details-table__label">Koleksiyon</span>
+                  <span class="product-details-table__value">Ay Işığı Serisi</span>
+                </div>
+              </div>
+
+              <div class="product-info__cta">
+                <button class="btn btn--solid btn--lg" id="openOrderBtn" style="width: 100%;">Sipariş Oluştur <span class="btn__arrow" style="margin-left:8px;">✦</span></button>
+              </div>
+
+              <p style="font-size: var(--text-sm); color: var(--color-text-light); line-height: 1.7;">
+                ✦ Ücretsiz hediye paketi &nbsp;&nbsp; ✦ Sertifikalı ürün &nbsp;&nbsp; ✦ 2 yıl garanti
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RELATED PRODUCTS -->
+      <section class="related-products">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="section-subtitle">Beğenebileceğiniz</span>
+            <h2>Benzer Ürünler</h2>
+            <div class="gold-divider"></div>
+          </div>
+          <div class="related-products__grid stagger reveal">
+            <!-- Related 1 -->
+            <a href="/product-detail.html" class="product-card">
+              <div class="product-card__image">
+                <img loading="lazy" decoding="async"  src="/assets/images/product_ring_2.jpg" alt="Sonsuzluk Bandı">
+                <div class="product-card__overlay">
+                  <span class="btn btn--outline-light btn--sm">Detayları Gör</span>
+                </div>
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__category">Yüzükler</span>
+                <h3 class="product-card__name">Sonsuzluk Bandı</h3>
+                <p class="product-card__desc">Geometrik çizgilerin buluştuğu modern bir klasik</p>
+                <span class="product-card__material">14K Altın</span>
+              </div>
+            </a>
+            <!-- Related 2 -->
+            <a href="/product-detail.html" class="product-card">
+              <div class="product-card__image">
+                <img loading="lazy" decoding="async"  src="/assets/images/product_necklace_1.jpg" alt="Hilal Kolye">
+                <div class="product-card__overlay">
+                  <span class="btn btn--outline-light btn--sm">Detayları Gör</span>
+                </div>
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__category">Kolyeler</span>
+                <h3 class="product-card__name">Hilal Kolye</h3>
+                <p class="product-card__desc">Ay'ın büyülü hilalini boynunuzda taşıyın</p>
+                <span class="product-card__material">14K Altın, Pırlanta</span>
+              </div>
+            </a>
+            <!-- Related 3 -->
+            <a href="/product-detail.html" class="product-card">
+              <div class="product-card__image">
+                <img loading="lazy" decoding="async"  src="/assets/images/product_bracelet_1.jpg" alt="Botanik Kelepçe">
+                <div class="product-card__overlay">
+                  <span class="btn btn--outline-light btn--sm">Detayları Gör</span>
+                </div>
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__category">Bileklikler</span>
+                <h3 class="product-card__name">Botanik Kelepçe</h3>
+                <p class="product-card__desc">El kazıma botanik motifleriyle süslenmiş kelepçe</p>
+                <span class="product-card__material">14K Altın</span>
+              </div>
+            </a>
+            <!-- Related 4 -->
+            <a href="/product-detail.html" class="product-card">
+              <div class="product-card__image">
+                <img loading="lazy" decoding="async"  src="/assets/images/collection_earrings.jpg" alt="Damla Küpe">
+                <div class="product-card__overlay">
+                  <span class="btn btn--outline-light btn--sm">Detayları Gör</span>
+                </div>
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__category">Küpeler</span>
+                <h3 class="product-card__name">Damla Küpe</h3>
+                <p class="product-card__desc">İnci detaylı zarif damla küpeler</p>
+                <span class="product-card__material">14K Altın, İnci</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <h3 class="footer__brand-name">Lunary</h3>
+            <p class="footer__brand-desc">Ayın ışığından ilham alan, el yapımı mücevherler. Her parça, zamansız zarafetin ve ince işçiliğin bir yansımasıdır.</p>
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+              <a href="#" class="footer__social-link" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="#" class="footer__social-link" aria-label="Pinterest"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 22v-6"/><path d="M12 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer__heading">Keşfet</h4>
+            <a href="/collections.html" class="footer__link">Koleksiyonlar</a>
+            <a href="/collections.html#yuzukler" class="footer__link">Yüzükler</a>
+            <a href="/collections.html#kolyeler" class="footer__link">Kolyeler</a>
+            <a href="/collections.html#bileklikler" class="footer__link">Bileklikler</a>
+            <a href="/collections.html#kupeler" class="footer__link">Küpeler</a>
+          </div>
+          <div>
+            <h4 class="footer__heading">Marka</h4>
+            <a href="/about.html" class="footer__link">Hakkımızda</a>
+            <a href="/blog.html" class="footer__link">Blog / Dergi</a>
+            <a href="/contact.html" class="footer__link">İletişim</a>
+          </div>
+          <div>
+            <h4 class="footer__heading">İletişim</h4>
+            <p class="footer__link">Nişantaşı, İstanbul</p>
+            <a href="mailto:info@lunary.com" class="footer__link">info@lunary.com</a>
+            <a href="tel:+902121234567" class="footer__link">+90 (212) 123 45 67</a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <span>© 2026 Lunary. Tüm hakları saklıdır.</span>
+          <span>Tasarım & Geliştirme <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="var(--color-accent)" style="vertical-align:middle; margin:0 4px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> <strong style="color:var(--color-accent); font-weight:500;">Shato</strong> tarafından yapıldı</span>
+        </div>
+      </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTop" aria-label="Yukarı çık">↑</button>
+
+  </div>
+
+  <!-- ORDER MODAL -->
+  <!-- ORDER MODAL (Luxury Design) -->
+  <style>
+    #orderModal .form-label { color: #e2e8f0 !important; margin-bottom: 0.5rem; display: inline-block; font-size: 0.9rem; }
+    #orderModal select option { background-color: #1a1a1a; color: #ffffff; }
+    #orderModal select:disabled { color: #718096 !important; border-color: rgba(255,255,255,0.1) !important; }
+    #orderModal input:read-only { color: #cbd5e0 !important; }
+  </style>
+  <div class="chat-modal" id="orderModal" style="display:none; position:fixed; inset:0; background:rgba(10,10,10,0.85); z-index:1000; align-items:center; justify-content:center; padding: 2vh; backdrop-filter:blur(5px);">
+    
+    <div style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); color: var(--color-text); font-family: var(--font-body);">
+      
+      <!-- Modal Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); position: sticky; top: 0; background: rgba(10, 10, 10, 0.95); z-index: 10;">
+        <h2 style="font-size: 1.5rem; font-family: var(--font-brand); margin: 0; color:var(--color-accent);">Sipariş Talebi</h2>
+        <div style="display: flex; gap: 1rem;">
+          <button type="button" onclick="closeOrderModal()" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; font-weight: bold; background-color: rgba(212, 175, 55, 0.15); color: var(--color-accent); border: 1px solid var(--color-accent); border-radius: 4px; transition: all 0.3s;">+ Daha Fazla Ürün Ekle</button>
+          <button type="button" onclick="closeOrderModal()" class="btn btn--outline" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-color:var(--color-text-muted); color:var(--color-text-muted);">Geri Dön</button>
+        </div>
+      </div>
+
+      <div style="padding: 2rem;">
+        <form id="orderForm">
+          
+          <!-- Product Item Card -->
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 4px; padding: 1.5rem; margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+              <div style="display: flex; gap: 1.5rem;">
+                <img src="/assets/images/product_ring_1.jpg" id="modalThumb" alt="Ürün" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                <div>
+                  <div style="font-family: var(--font-heading); color: var(--color-accent); font-size:1.1rem; margin-bottom: 0.5rem;">SKU: <span id="modalSku" style="color:var(--color-text);">MKS0751</span></div>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <button type="button" style="width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.1); background: transparent; cursor: pointer; font-size: 1.2rem; color: var(--color-text); transition:all 0.3s;" onmouseover="this.style.borderColor='var(--color-accent)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">-</button>
+                    <input type="text" value="1" style="width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.1); background: transparent; text-align: center; color: var(--color-accent); font-family:var(--font-heading);" readonly>
+                    <button type="button" style="width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.1); background: transparent; cursor: pointer; font-size: 1.2rem; color: var(--color-text); transition:all 0.3s;" onmouseover="this.style.borderColor='var(--color-accent)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">+</button>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="button" style="background: transparent; border: none; color: #ff4d4d; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                  Kaldır
+                </button>
+              </div>
+            </div>
+
+            <!-- Form Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              
+              <div class="form-group" style="margin:0;">
+                <label class="form-label">Materyal</label>
+                <input type="text" id="varMaterial" value="925 Ayar Gümüş" class="form-input" style="background: rgba(0,0,0,0.5); border-color:rgba(212,175,55,0.2); color:var(--color-text-muted);" readonly>
+              </div>
+
+              <div class="form-group" style="margin:0;">
+                <label class="form-label">Renk <span style="color: var(--color-accent);">*</span></label>
+                <select id="varColor" class="form-input" style="background: rgba(0,0,0,0.5); border-color:rgba(212,175,55,0.4); color:white;" required>
+                  <option value="">Seçiniz</option>
+                  <option value="Sarı Altın">Sarı Altın</option>
+                  <option value="Beyaz Altın">Beyaz Altın</option>
+                  <option value="Rose Altın">Rose Altın</option>
+                  <option value="Gümüş">Gümüş</option>
+                </select>
+              </div>
+
+              <!-- Dynamic ones -->
+              <div class="form-group" style="margin:0;">
+                <label class="form-label">Zincir Uzunluğu</label>
+                <select id="varChainSize" class="form-input" style="background: rgba(0,0,0,0.5); border-color:rgba(212,175,55,0.4); color:white;" disabled>
+                  <option value="">Seçiniz</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin:0;">
+                <label class="form-label">Yüzük Ölçüsü</label>
+                <select id="varRingSize" class="form-input" style="background: rgba(0,0,0,0.5); border-color:rgba(212,175,55,0.4); color:white;" disabled>
+                  <option value="">Seçiniz</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin:0; grid-column: span 2;">
+                <label class="form-label">Bileklik Uzunluğu</label>
+                <select id="varBraceletSize" class="form-input" style="background: rgba(0,0,0,0.5); border-color:rgba(212,175,55,0.4); color:white;" disabled>
+                  <option value="">Seçiniz</option>
+                </select>
+              </div>
+
+            </div>
+
+            <!-- Note -->
+            <div class="form-group" style="margin:0;">
+              <label class="form-label">Not <span style="color: var(--color-accent);">*</span></label>
+              <textarea id="varNote" rows="3" class="form-input" style="background: rgba(0,0,0,0.5); border-color:rgba(212,175,55,0.4); color:white; resize:vertical;" placeholder="Bu ürün için özel isteklerinizi veya notlarınızı yazın..." required></textarea>
+            </div>
+          </div>
+
+          <!-- Shipping -->
+          <div style="margin-bottom: 2rem; display: flex; align-items: center; gap: 0.8rem; color: var(--color-text-muted); font-size: 0.95rem;">
+            <input type="checkbox" id="wantsShipping" style="width: 18px; height: 18px; accent-color: var(--color-accent);">
+            <label for="wantsShipping">Siparişinizi kargolamak istiyor musunuz?</label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="submitOrderBtn" class="btn btn--solid btn--lg" style="width: 100%; background-color: var(--color-accent); color: var(--color-bg); font-weight: bold; border-radius: 4px;">
+            Siparişi Oluştur ve İletişim Başlat
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script type="module" src="/js/main.js"></script>
+  <script>
+    // Product Detail Logic
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id') || 'p1';
+      
+      try {
+        const res = await fetch('/api/products');
+        const products = await res.json();
+        const product = products.find(p => p.id === productId) || products[0];
+        
+        // Populate static elements
+        document.getElementById('bTitle').innerText = product.title;
+        document.getElementById('pTitle').innerText = product.title;
+        document.getElementById('pDesc').innerText = product.desc;
+        document.getElementById('pMat').innerText = product.material;
+        document.getElementById('pCat').innerText = product.category.toUpperCase();
+        
+        document.getElementById('bCatLink').innerText = product.category.toUpperCase();
+        document.getElementById('bCatLink').href = `/collections.html#${product.category}ler`;
+
+        // Populate Images
+        const mainImg = document.getElementById('mainImg');
+        mainImg.src = product.image;
+        mainImg.alt = product.title;
+
+        // Populate thumbs (just repeat main image for demo or keep static placeholders)
+        const thumbs = document.querySelectorAll('.product-gallery__thumb');
+        if (thumbs[0]) { thumbs[0].dataset.img = product.image; thumbs[0].querySelector('img').src = product.image; }
+      } catch (err) {
+        console.error("Could not load product details", err);
+      }
+
+      // Product Gallery Thumbnails
+      const thumbs = document.querySelectorAll('.product-gallery__thumb');
+      const mainImg = document.getElementById('mainImg');
+      
+      if (thumbs.length && mainImg) {
+        thumbs.forEach(thumb => {
+          thumb.addEventListener('click', () => {
+            thumbs.forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+              mainImg.src = thumb.dataset.img;
+              mainImg.style.opacity = '1';
+            }, 200);
+          });
+        });
+        mainImg.style.transition = 'opacity 0.3s ease';
+      }
+
+      // Order Modal Logic
+      const orderBtn = document.getElementById('openOrderBtn');
+      const orderModal = document.getElementById('orderModal');
+      const dynamicWrapper = document.getElementById('dynamicFieldWrapper');
+      
+      const category = document.querySelector('.product-info__category').innerText.trim().toLowerCase();
+      const productTitle = document.querySelector('.product-info__name').innerText.trim();
+
+      if (orderBtn) {
+        orderBtn.addEventListener('click', () => {
+          if (!Auth.isLoggedIn()) {
+            if (typeof openAuthModal === 'function') {
+              openAuthModal('login');
+            } else {
+              window.location.href='/login.html';
+            }
+            return;
+          }
+          
+          // Setup modal based on product
+          document.getElementById('modalThumb').src = mainImg.src;
+          const materialText = document.querySelector('.product-details-table__row:nth-child(1) .product-details-table__value').innerText;
+          document.getElementById('varMaterial').value = materialText;
+
+          // Enable/Disable specific selects based on category
+          const cRing = document.getElementById('varRingSize');
+          const cChain = document.getElementById('varChainSize');
+          const cBrac = document.getElementById('varBraceletSize');
+          
+          cRing.disabled = true; cChain.disabled = true; cBrac.disabled = true;
+          cRing.required = false; cChain.required = false; cBrac.required = false;
+
+          if (category.includes('yüzük') || category.includes('yuzuk')) {
+            cRing.disabled = false; cRing.required = true;
+            cRing.innerHTML = '<option value="">Seçiniz</option><option value="10">10</option><option value="12">12</option><option value="14">14</option><option value="16">16</option><option value="18">18</option><option value="20">20</option>';
+            cRing.style.color = '#fff';
+            cRing.style.borderColor = 'rgba(212,175,55,0.4)';
+          } else if (category.includes('bileklik')) {
+            cBrac.disabled = false; cBrac.required = true;
+            cBrac.innerHTML = '<option value="">Seçiniz</option><option value="16cm">16 cm</option><option value="17cm">17 cm</option><option value="18cm">18 cm</option><option value="19cm">19 cm</option>';
+            cBrac.style.color = '#fff';
+            cBrac.style.borderColor = 'rgba(212,175,55,0.4)';
+          } else if (category.includes('kolye') || category.includes('zincir')) {
+            cChain.disabled = false; cChain.required = true;
+            cChain.innerHTML = '<option value="">Seçiniz</option><option value="40cm">40 cm</option><option value="45cm">45 cm</option><option value="50cm">50 cm</option><option value="60cm">60 cm</option>';
+            cChain.style.color = '#fff';
+            cChain.style.borderColor = 'rgba(212,175,55,0.4)';
+          }
+          
+          orderModal.style.display = 'flex';
+        });
+      }
+
+      document.getElementById('orderForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submitOrderBtn');
+        btn.innerText = 'Gönderiliyor...';
+
+        const cRing = document.getElementById('varRingSize');
+        const cChain = document.getElementById('varChainSize');
+        const cBrac = document.getElementById('varBraceletSize');
+
+        const variations = {
+          Materyal: document.getElementById('varMaterial').value,
+          Renk: document.getElementById('varColor').value,
+          Not: document.getElementById('varNote').value,
+          KargoIstiyorMu: document.getElementById('wantsShipping').checked ? 'Evet' : 'Hayır'
+        };
+        
+        if (!cRing.disabled) variations['Ölçü'] = cRing.value;
+        if (!cChain.disabled) variations['Uzunluk'] = cChain.value;
+        if (!cBrac.disabled) variations['Uzunluk'] = cBrac.value;
+
+        try {
+          const res = await fetch('/api/orders', {
+            method: 'POST',
+            headers: Auth.getAuthHeaders(),
+            body: JSON.stringify({
+              productId: 'p_ayisigi', // Hardcoded for static demo, could be dynamic
+              productTitle: productTitle,
+              variations
+            })
+          });
+          
+          if(res.ok) {
+            alert('Sipariş talebiniz başarıyla alındı! "Hesabım" sayfasından takip edebilir ve mesajlaşabilirsiniz.');
+            window.location.href='/account.html';
+          } else {
+            alert('Hata oluştu.');
+            btn.innerText = 'Seçilen Ürün İçin Siparişi Gönder';
+          }
+        } catch(err) {
+          alert('Bağlantı hatası.');
+          btn.innerText = 'Seçilen Ürün İçin Siparişi Gönder';
+        }
+      });
+    });
+
+    function closeOrderModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

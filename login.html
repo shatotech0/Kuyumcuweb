@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giriş Yap - Lunary</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('/assets/images/hero_2.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .auth-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.85);
+      z-index: 0;
+    }
+    .auth-box {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 3rem;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .auth-box h1 {
+      font-family: var(--font-brand);
+      color: var(--color-accent);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .auth-box p {
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+    }
+    .auth-link {
+      display: block;
+      margin-top: 1.5rem;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .auth-link:hover {
+      color: var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-box">
+      <h1>Lunary</h1>
+      <p>Özel koleksiyonlara erişmek için giriş yapın</p>
+      
+      <form id="loginForm">
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">E-Posta</label>
+          <input type="email" id="email" class="form-input" required>
+        </div>
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Şifre</label>
+          <input type="password" id="password" class="form-input" required>
+        </div>
+        
+        <button type="submit" class="btn btn--solid" style="width: 100%; margin-top: 1rem;" id="loginBtn">Giriş Yap</button>
+      </form>
+
+      <a href="#" id="regLink" class="auth-link">Hesabınız yok mu? <strong>Kayıt Olun</strong></a>
+      <a href="/" class="auth-link" style="margin-top: 0.5rem;">Geri Dön</a>
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectParam = urlParams.get('redirect');
+    
+    // Update register link to keep redirect param
+    const regLink = document.getElementById('regLink');
+    regLink.href = redirectParam ? '/register.html?redirect=' + encodeURIComponent(redirectParam) : '/register.html';
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      btn.innerText = 'Lütfen Bekleyin...';
+      
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        
+        const data = await res.json();
+        if (res.ok) {
+          Auth.setToken(data.token, data.user);
+          if (redirectParam) {
+            window.location.href = redirectParam;
+          } else {
+            window.location.href='/account.html';
+          }
+        } else {
+          alert(data.error || 'Giriş başarısız.');
+          btn.innerText = 'Giriş Yap';
+        }
+      } catch (err) {
+        alert('Sunucu hatası.');
+        btn.innerText = 'Giriş Yap';
+      }
+    });
+  </script>
+</body>
+</html>
