@@ -367,7 +367,7 @@
 
     // --- API Fonksiyonları ---
     async function fetchProducts() {
-      const res = await fetch('/data/products.json');
+      const res = await fetch('/api/products');
       const data = await res.json();
       const list = document.getElementById('productList');
       list.innerHTML = '';
@@ -388,7 +388,7 @@
     }
 
     async function fetchBlogs() {
-      const res = await fetch('/data/blogs.json');
+      const res = await fetch('/api/blogs');
       const data = await res.json();
       const list = document.getElementById('blogList');
       list.innerHTML = '';
@@ -429,7 +429,7 @@
         });
         alert('Ürün başarıyla güncellendi!');
       } else {
-        await fetch('/data/products.json', {
+        await fetch('/api/products', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -451,7 +451,7 @@
 
     async function editProduct(id) {
       // Find product in current list (by fetching all or from API)
-      const res = await fetch('/data/products.json');
+      const res = await fetch('/api/products');
       const data = await res.json();
       const product = data.find(p => p.id === id);
       
@@ -483,7 +483,7 @@
       const btn = e.target.querySelector('button');
       btn.innerText = 'Yükleniyor...';
       
-      await fetch('/data/blogs.json', {
+      await fetch('/api/blogs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
