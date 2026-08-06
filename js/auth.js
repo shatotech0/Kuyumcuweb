@@ -43,17 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let authLinkHTML = '';
   if (user) {
     authLinkHTML = `
-      <div class="user-dropdown" style="position:relative; display:inline-block; margin-left:1rem;">
-        <button class="navbar__link" id="userDropdownBtn" style="display:flex; align-items:center; background:none; border:none; cursor:pointer; color:inherit;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        </button>
-        <div id="userDropdownMenu" style="display:none; position:absolute; right:0; top:100%; background:var(--color-bg); border:1px solid rgba(212,175,55,0.3); border-radius:4px; min-width:180px; box-shadow:0 10px 20px rgba(0,0,0,0.5); z-index:100; flex-direction:column; margin-top:0.5rem; overflow:hidden;">
-          ${user.role === 'admin' ? `<a href="/indexadmin.html" style="padding:0.8rem 1rem; color:var(--color-accent); font-weight:bold; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.05); display:block;">Yönetici Paneli</a>` : ''}
-          <a href="/account.html" style="padding:0.8rem 1rem; color:var(--color-text); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.05); display:block;">Hesabım Paneli</a>
-          <a href="/account.html?support=1" style="padding:0.8rem 1rem; color:var(--color-text); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.05); display:block;">Genel Destek & İletişim</a>
-          <button onclick="Auth.logout()" style="padding:0.8rem 1rem; color:#ff4d4d; text-align:left; background:none; border:none; cursor:pointer; width:100%; display:block; font-family:inherit;">Çıkış Yap</button>
-        </div>
-      </div>
+      <a href="/account.html" class="navbar__link" style="margin-left:1rem; border:1px solid var(--color-accent); padding:0.4rem 1rem; border-radius:20px; color:var(--color-accent); font-weight:bold; background:rgba(212,175,55,0.1);">
+        ${user.role === 'admin' ? 'Yönetim Paneli' : 'Hesabım'}
+      </a>
     `;
   } else {
     authLinkHTML = `
@@ -62,19 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   navLinks.insertAdjacentHTML('beforeend', authLinkHTML);
-
-  // Toggle dropdown
-  const dropdownBtn = document.getElementById('userDropdownBtn');
-  const dropdownMenu = document.getElementById('userDropdownMenu');
-  if (dropdownBtn && dropdownMenu) {
-    dropdownBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
-    });
-    document.addEventListener('click', () => {
-      dropdownMenu.style.display = 'none';
-    });
-  }
 
   // Show auth banner on homepage if not logged in
   const authBanner = document.getElementById('heroAuthBanner');
@@ -180,7 +159,7 @@ window.handleAuthLogin = async function(e) {
     const data = await res.json();
     if(res.ok) {
       Auth.setToken(data.token, data.user);
-      window.location.reload();
+      window.location.href = '/account.html';
     } else {
       document.getElementById('authLoginError').innerText = data.error;
     }
@@ -204,7 +183,7 @@ window.handleAuthRegister = async function(e) {
     const data = await res.json();
     if(res.ok) {
       Auth.setToken(data.token, data.user);
-      window.location.reload();
+      window.location.href = '/account.html';
     } else {
       document.getElementById('authRegError').innerText = data.error;
     }

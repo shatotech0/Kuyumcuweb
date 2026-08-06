@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "Lunary — Kuyumcu Vitrin & Blog Sitesi",
   "scripts": {
-    "start": "node server.js",`n    "dev": "node server.js",
+    "start": "node server.js",
+    "dev": "node server.js",
     "build": "vite build && node copy-data.js",
     "preview": "vite preview"
   },
