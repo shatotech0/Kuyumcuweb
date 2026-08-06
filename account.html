@@ -50,6 +50,9 @@
       border-radius: 4px;
     }
     
+    .content-section { display: none; }
+    .content-section.active { display: block; }
+    
     .order-card {
       border: 1px solid var(--color-border);
       padding: 1.5rem;
@@ -70,6 +73,24 @@
       color: var(--color-accent);
     }
 
+    /* Admin Table Styles */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .data-table th, .data-table td {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 1rem;
+      text-align: left;
+    }
+    .data-table th { color: var(--color-accent); font-family: var(--font-heading); }
+    .data-image { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; }
+    
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; color: var(--color-accent); }
+    .form-control { width: 100%; padding: 1rem; background: transparent; border: 1px solid rgba(212, 175, 55, 0.3); color: var(--color-text); border-radius: 4px; }
+    
     /* Chat UI */
     .chat-modal {
       display: none;
@@ -99,41 +120,15 @@
       align-items: center;
       color: var(--color-accent);
     }
-    .chat-body {
-      flex: 1;
-      padding: 1.5rem;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .chat-message {
-      max-width: 80%;
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-    }
-    .msg-mine {
-      align-self: flex-end;
-      background: var(--color-accent);
-      color: var(--color-bg);
-    }
-    .msg-theirs {
-      align-self: flex-start;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--color-border);
-    }
+    .chat-body { flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
+    .chat-message { max-width: 80%; padding: 0.8rem 1rem; border-radius: 8px; }
+    .msg-mine { align-self: flex-end; background: var(--color-accent); color: var(--color-bg); }
+    .msg-theirs { align-self: flex-start; background: rgba(255,255,255,0.05); border: 1px solid var(--color-border); }
     .msg-meta { font-size: 0.7rem; opacity: 0.7; margin-bottom: 0.2rem; }
-    
-    .chat-input {
-      padding: 1rem;
-      border-top: 1px solid var(--color-border);
-      display: flex;
-      gap: 0.5rem;
-    }
+    .chat-input { padding: 1rem; border-top: 1px solid var(--color-border); display: flex; gap: 0.5rem; }
   </style>
 </head>
 <body>
-  <!-- Navbar placeholders handled by JS -->
   <nav class="navbar navbar--solid" id="navbar">
     <div class="navbar__inner">
       <a href="/" class="navbar__logo"><span class="navbar__logo-text">Lunary</span></a>
@@ -148,19 +143,104 @@
     <aside class="account-sidebar">
       <h3 id="userNameDisplay">Hesabım</h3>
       <div class="account-menu">
-        <button class="active">Siparişlerim & Mesajlar</button>
-        <button onclick="Auth.logout()">Çıkış Yap</button>
+        <button id="tabBtn-myOrders" class="active" onclick="switchTab('myOrders')">Siparişlerim & Mesajlar</button>
+        
+        <!-- SADECE ADMİNLER İÇİN -->
+        <div id="adminMenu" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--color-border);">
+          <small style="color:var(--color-accent); display:block; margin-bottom:0.5rem;">YÖNETİCİ PANELİ</small>
+          <button id="tabBtn-adminOrders" onclick="switchTab('adminOrders')">Tüm Siparişler</button>
+          <button id="tabBtn-adminProducts" onclick="switchTab('adminProducts')">Ürün Yönetimi</button>
+          <button id="tabBtn-adminBlogs" onclick="switchTab('adminBlogs')">Blog Yönetimi</button>
+        </div>
+
+        <button onclick="Auth.logout()" style="margin-top:1rem; color:#ff4d4d;">Çıkış Yap</button>
       </div>
     </aside>
     
     <section class="account-content">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
-        <h2 style="color:var(--color-accent); margin:0;">Sipariş Taleplerim</h2>
-        <button class="btn btn--solid" onclick="startGeneralSupport()">Genel Destek / Soru Sor</button>
+      
+      <!-- MÜŞTERİ SİPARİŞLERİ -->
+      <div id="myOrders" class="content-section active">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
+          <h2 style="color:var(--color-accent); margin:0;">Kişisel Siparişlerim</h2>
+          <button class="btn btn--solid" onclick="startGeneralSupport()">Genel Destek / Soru Sor</button>
+        </div>
+        <div id="ordersList">Yükleniyor...</div>
       </div>
-      <div id="ordersList">
-        Yükleniyor...
+
+      <!-- ADMİN: TÜM SİPARİŞLER -->
+      <div id="adminOrders" class="content-section">
+        <h2 style="color:var(--color-accent); margin-bottom: 1.5rem;">Tüm Sipariş Talepleri</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Tarih</th>
+              <th>Müşteri</th>
+              <th>Ürün</th>
+              <th>Durum</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody id="adminOrderList"></tbody>
+        </table>
       </div>
+
+      <!-- ADMİN: ÜRÜN YÖNETİMİ -->
+      <div id="adminProducts" class="content-section">
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+          <div style="flex: 1; min-width:300px; background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 4px; border: 1px solid var(--color-border);">
+            <h3 id="productFormTitle" style="color:var(--color-accent); margin-bottom: 1rem;">Yeni Ürün Ekle</h3>
+            <form id="productForm">
+              <input type="hidden" id="p_id" value="">
+              <div class="form-group">
+                <label>Kategori</label>
+                <select class="form-control" id="p_category" required>
+                  <option value="yuzuk">Yüzük</option>
+                  <option value="kolye">Kolye</option>
+                  <option value="bileklik">Bileklik</option>
+                  <option value="kupe">Küpe</option>
+                </select>
+              </div>
+              <div class="form-group"><label>Ürün Adı</label><input type="text" class="form-control" id="p_title" required></div>
+              <div class="form-group"><label>Açıklama</label><textarea class="form-control" id="p_desc" rows="2" required></textarea></div>
+              <div class="form-group"><label>Materyal</label><input type="text" class="form-control" id="p_material" required></div>
+              <div class="form-group"><label>Görsel URL</label><input type="text" class="form-control" id="p_image" placeholder="/assets/images/resim.jpg" required></div>
+              <button type="submit" class="btn btn--solid" id="productSubmitBtn" style="width:100%;">Kaydet</button>
+              <button type="button" class="btn btn--outline" id="productCancelBtn" style="display:none; width:100%; margin-top:0.5rem;" onclick="resetProductForm()">İptal</button>
+            </form>
+          </div>
+          <div style="flex: 2; min-width:400px;">
+            <table class="data-table">
+              <thead><tr><th>Görsel</th><th>Adı</th><th>Kategori</th><th>İşlem</th></tr></thead>
+              <tbody id="productList"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMİN: BLOG YÖNETİMİ -->
+      <div id="adminBlogs" class="content-section">
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+          <div style="flex: 1; min-width:300px; background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 4px; border: 1px solid var(--color-border);">
+            <h3 style="color:var(--color-accent); margin-bottom: 1rem;">Yeni Blog Ekle</h3>
+            <form id="blogForm">
+              <div class="form-group"><label>Etiket</label><input type="text" class="form-control" id="b_tag" required></div>
+              <div class="form-group"><label>Başlık</label><input type="text" class="form-control" id="b_title" required></div>
+              <div class="form-group"><label>Özet</label><textarea class="form-control" id="b_excerpt" rows="2" required></textarea></div>
+              <div class="form-group"><label>İçerik</label><textarea class="form-control" id="b_content" rows="4" required></textarea></div>
+              <div class="form-group"><label>Görsel URL</label><input type="text" class="form-control" id="b_image" required></div>
+              <button type="submit" class="btn btn--solid" style="width: 100%;">Kaydet</button>
+            </form>
+          </div>
+          <div style="flex: 2; min-width:400px;">
+            <table class="data-table">
+              <thead><tr><th>Görsel</th><th>Başlık</th><th>Tarih</th><th>İşlem</th></tr></thead>
+              <tbody id="blogList"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </section>
   </main>
 
@@ -171,9 +251,22 @@
         <h3 id="chatTitle">Sipariş Detayı</h3>
         <button class="btn btn--outline" onclick="closeChat()" style="padding: 0.2rem 0.5rem;">Kapat</button>
       </div>
+      
+      <!-- Admin Durum Güncelleme -->
+      <div id="adminOrderStatusContainer" style="display:none; padding: 1rem 1.5rem; background:rgba(212,175,55,0.05); border-bottom:1px solid var(--color-border); align-items:center; gap:1rem;">
+        <label>Durum:</label>
+        <select id="orderStatusSelect" class="form-control" style="width:200px; padding:0.5rem;" onchange="updateOrderStatus()">
+          <option value="Beklemede">Beklemede</option>
+          <option value="İşleme Alındı">İşleme Alındı</option>
+          <option value="Hazırlanıyor">Hazırlanıyor</option>
+          <option value="Tamamlandı">Tamamlandı</option>
+          <option value="İptal Edildi">İptal Edildi</option>
+        </select>
+      </div>
+
       <div class="chat-body" id="chatBody"></div>
       <form class="chat-input" id="chatForm">
-        <input type="text" id="chatInput" class="form-input" placeholder="Mesajınızı yazın..." required style="flex:1;">
+        <input type="text" id="chatInput" class="form-control" placeholder="Mesajınızı yazın..." required style="flex:1;">
         <button type="submit" class="btn btn--solid">Gönder</button>
       </form>
     </div>
@@ -188,9 +281,31 @@
     const user = Auth.getUser();
     document.getElementById('userNameDisplay').innerText = `Hoş Geldiniz, ${user.name}`;
 
+    // Show admin menu if admin
+    if (user.role === 'admin') {
+      document.getElementById('adminMenu').style.display = 'block';
+      document.getElementById('adminOrderStatusContainer').style.display = 'flex';
+      switchTab('adminOrders'); // Admins land on All Orders by default
+    }
+
+    // Tabs
+    function switchTab(tabId) {
+      document.querySelectorAll('.account-menu button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+      
+      document.getElementById('tabBtn-' + tabId).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+      
+      if (tabId === 'myOrders') loadMyOrders();
+      if (tabId === 'adminOrders') loadAdminOrders();
+      if (tabId === 'adminProducts') fetchProducts();
+      if (tabId === 'adminBlogs') fetchBlogs();
+    }
+
     let currentOrderId = null;
 
-    async function loadOrders() {
+    // --- MÜŞTERİ: KENDİ SİPARİŞLERİ ---
+    async function loadMyOrders() {
       const res = await fetch('/api/orders', { headers: Auth.getAuthHeaders() });
       if (res.ok) {
         const orders = await res.json();
@@ -205,20 +320,43 @@
             <div class="order-info">
               <h4>${o.productTitle}</h4>
               <p>Tarih: ${new Date(o.createdAt).toLocaleDateString('tr-TR')}</p>
-              <p>Varyasyonlar: ${Object.values(o.variations).join(', ')}</p>
             </div>
             <div style="text-align:right;">
               <div class="status-badge" style="margin-bottom:0.5rem; display:inline-block;">${o.status}</div><br>
-              <button class="btn btn--outline" onclick="openChat('${o.id}', '${o.productTitle}')">Mesajlar / Detay</button>
+              <button class="btn btn--outline" onclick="openChat('${o.id}', '${o.productTitle}', '${o.status}')">Mesajlar / Detay</button>
             </div>
           </div>
         `).join('');
       }
     }
 
-    async function openChat(orderId, title) {
+    // --- ADMİN: TÜM SİPARİŞLER ---
+    async function loadAdminOrders() {
+      const res = await fetch('/api/orders', { headers: Auth.getAuthHeaders() });
+      if (res.ok) {
+        const orders = await res.json();
+        const list = document.getElementById('adminOrderList');
+        list.innerHTML = orders.map(o => `
+          <tr>
+            <td>${new Date(o.createdAt).toLocaleDateString('tr-TR')}</td>
+            <td>${o.customerName}</td>
+            <td>${o.productTitle}</td>
+            <td><strong>${o.status}</strong></td>
+            <td>
+              <button onclick="openChat('${o.id}', '${o.customerName} - ${o.productTitle}', '${o.status}')" class="btn btn--outline" style="padding:0.2rem 0.8rem;">Yönet</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // --- İLETİŞİM / CHAT ---
+    async function openChat(orderId, title, status) {
       currentOrderId = orderId;
-      document.getElementById('chatTitle').innerText = title + ' - İletişim';
+      document.getElementById('chatTitle').innerText = title;
+      if(user.role === 'admin') {
+        document.getElementById('orderStatusSelect').value = status;
+      }
       document.getElementById('chatModal').classList.add('active');
       loadMessages();
     }
@@ -228,22 +366,15 @@
       currentOrderId = null;
     }
 
-    async function startGeneralSupport() {
-      // Create a dummy 'order' acting as a support thread
-      const res = await fetch('/api/orders', {
-        method: 'POST',
+    async function updateOrderStatus() {
+      if (!currentOrderId) return;
+      const status = document.getElementById('orderStatusSelect').value;
+      await fetch(`/api/orders/${currentOrderId}/status`, {
+        method: 'PUT',
         headers: Auth.getAuthHeaders(),
-        body: JSON.stringify({
-          productId: 'support',
-          productTitle: 'Genel Destek / Soru',
-          variations: { Not: 'Genel Müşteri Desteği' }
-        })
+        body: JSON.stringify({ status })
       });
-      if(res.ok) {
-        const order = await res.json();
-        loadOrders();
-        openChat(order.id, order.productTitle);
-      }
+      loadAdminOrders();
     }
 
     async function loadMessages() {
@@ -282,17 +413,131 @@
       }
     });
 
-    loadOrders().then(() => {
-      // Auto open support if requested from dropdown
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('support') === '1') {
-        startGeneralSupport();
-        // Clean URL to prevent re-opening on refresh
-        window.history.replaceState({}, document.title, window.location.pathname);
+    async function startGeneralSupport() {
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: Auth.getAuthHeaders(),
+        body: JSON.stringify({ productId: 'support', productTitle: 'Genel Destek / Soru', variations: { Not: 'Müşteri Desteği' } })
+      });
+      if(res.ok) {
+        const order = await res.json();
+        loadMyOrders();
+        openChat(order.id, order.productTitle, order.status);
       }
+    }
+
+    setInterval(() => { if(currentOrderId) loadMessages(); }, 3000);
+
+    // --- ADMİN: ÜRÜN YÖNETİMİ ---
+    async function fetchProducts() {
+      const res = await fetch('/api/products');
+      const data = await res.json();
+      const list = document.getElementById('productList');
+      list.innerHTML = data.map(p => `
+        <tr>
+          <td><img src="${p.image}" class="data-image" onerror="this.src='/assets/images/hero_1.jpg'"></td>
+          <td>${p.title}</td>
+          <td style="text-transform:capitalize;">${p.category}</td>
+          <td>
+            <button onclick="editProduct('${p.id}')" style="color:var(--color-accent); background:none; border:none; cursor:pointer;">Düzenle</button>
+            <button onclick="deleteProduct('${p.id}')" style="color:#ff4d4d; background:none; border:none; cursor:pointer; margin-left:0.5rem;">Sil</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('productForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('p_id').value;
+      const payload = {
+        category: document.getElementById('p_category').value,
+        title: document.getElementById('p_title').value,
+        desc: document.getElementById('p_desc').value,
+        material: document.getElementById('p_material').value,
+        image: document.getElementById('p_image').value
+      };
+      
+      const btn = document.getElementById('productSubmitBtn');
+      btn.innerText = 'İşleniyor...';
+      
+      if (id) {
+        await fetch('/api/products/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      } else {
+        await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      }
+      
+      resetProductForm();
+      fetchProducts();
     });
-    
-    setInterval(() => { if(currentOrderId) loadMessages(); }, 3000); // Poll messages
+
+    function resetProductForm() {
+      document.getElementById('productForm').reset();
+      document.getElementById('p_id').value = '';
+      document.getElementById('productFormTitle').innerText = 'Yeni Ürün Ekle';
+      document.getElementById('productSubmitBtn').innerText = 'Kaydet';
+      document.getElementById('productCancelBtn').style.display = 'none';
+    }
+
+    async function editProduct(id) {
+      const res = await fetch('/api/products');
+      const data = await res.json();
+      const p = data.find(x => x.id === id);
+      if(p) {
+        document.getElementById('p_id').value = p.id;
+        document.getElementById('p_category').value = p.category;
+        document.getElementById('p_title').value = p.title;
+        document.getElementById('p_desc').value = p.desc;
+        document.getElementById('p_material').value = p.material;
+        document.getElementById('p_image').value = p.image;
+        document.getElementById('productFormTitle').innerText = 'Ürünü Düzenle';
+        document.getElementById('productCancelBtn').style.display = 'block';
+      }
+    }
+
+    async function deleteProduct(id) {
+      if(confirm('Silmek istediğinize emin misiniz?')) {
+        await fetch('/api/products/' + id, { method: 'DELETE' });
+        fetchProducts();
+      }
+    }
+
+    // --- ADMİN: BLOG YÖNETİMİ ---
+    async function fetchBlogs() {
+      const res = await fetch('/api/blogs');
+      const data = await res.json();
+      document.getElementById('blogList').innerHTML = data.map(b => `
+        <tr>
+          <td><img src="${b.image}" class="data-image" onerror="this.src='/assets/images/hero_1.jpg'"></td>
+          <td>${b.title}</td>
+          <td>${b.date}</td>
+          <td><button onclick="deleteBlog('${b.id}')" style="color:#ff4d4d; background:none; border:none; cursor:pointer;">Sil</button></td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('blogForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        tag: document.getElementById('b_tag').value,
+        title: document.getElementById('b_title').value,
+        excerpt: document.getElementById('b_excerpt').value,
+        content: document.getElementById('b_content').value,
+        image: document.getElementById('b_image').value
+      };
+      await fetch('/api/blogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      e.target.reset();
+      fetchBlogs();
+    });
+
+    async function deleteBlog(id) {
+      if(confirm('Silmek istediğinize emin misiniz?')) {
+        await fetch('/api/blogs/' + id, { method: 'DELETE' });
+        fetchBlogs();
+      }
+    }
+
+    // Initialize
+    if(user.role !== 'admin') loadMyOrders();
   </script>
 </body>
 </html>
